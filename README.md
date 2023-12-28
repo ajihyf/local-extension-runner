@@ -17,6 +17,6 @@ As a result, any features that rely on `contributions` within the `package.json`
 
 ## Release Notes
 
-### 0.1.0
+### 0.0.1
 
 Initial release.
