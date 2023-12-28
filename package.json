@@ -2,7 +2,7 @@
   "name": "local-extension-runner",
   "displayName": "Local Extension Runner",
   "description": "Run any local extension javascript files",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "ajihyf",
   "author": {
     "name": "ajihyf",

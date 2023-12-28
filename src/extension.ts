@@ -3,7 +3,10 @@
 import * as vscode from 'vscode';
 
 interface ExtensionModule<T> {
-  activate?(context: vscode.ExtensionContext): Thenable<T>;
+  activate?(
+    context: vscode.ExtensionContext,
+    vscodeApi: typeof vscode
+  ): Thenable<T>;
   deactivate?(): Thenable<void>;
 }
 
@@ -49,11 +52,46 @@ async function activateLocalExtensions(context: vscode.ExtensionContext) {
           }
           requireId = require.resolve(localExtensionUri.fsPath);
           module = require(requireId) as ExtensionModule<unknown>;
+          // We don't use {...context} because some of the context keys
+          // are marked as proposed-api, getting them on non-insider VSCode will
+          // results in an error
+          const {
+            workspaceState,
+            globalState,
+            secrets,
+            extensionUri,
+            extensionPath,
+            environmentVariableCollection,
+            asAbsolutePath,
+            storageUri,
+            storagePath,
+            globalStorageUri,
+            globalStoragePath,
+            logUri,
+            logPath,
+            extensionMode,
+            extension,
+          } = context;
           exports = await module.activate?.(
             Object.freeze({
-              ...context,
               subscriptions,
-            })
+              workspaceState,
+              globalState,
+              secrets,
+              extensionUri,
+              extensionPath,
+              environmentVariableCollection,
+              asAbsolutePath,
+              storageUri,
+              storagePath,
+              globalStorageUri,
+              globalStoragePath,
+              logUri,
+              logPath,
+              extensionMode,
+              extension,
+            }),
+            vscode
           );
           activated = true;
           console.log(`Loaded local extension in ${folder.uri}`);

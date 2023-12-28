@@ -7,8 +7,34 @@ Therefore, we are hoping to have a local plugin runner that can execute the exte
 
 ## How to Use
 
-Simply place your developed `index.js` into the `.vscode/local-extension` directory.
-The Local Extension Runner will automatically detect and execute your extension upon starting VSCode.
+1. Develop your own extension which exports a function named `activate` that
+   takes in a `vscode.ExtensionContext` and a `vscode` object and an optional `deactivate` function.
+   See [VSCode Extension Docs](https://code.visualstudio.com/api) for details.
+   The extension script must use CommonJS module and do not `require('vscode')` directly.
+
+```js
+/**
+ * @param {import('vscode').ExtensionContext} ctx
+ * @param {import('vscode')} vscode
+ */
+async function activate(ctx, vscode) {
+  ctx.subscriptions.push(
+    vscode.commands.registerCommand('local-extension.pickAndEcho', async () => {
+      const selection = await vscode.window.showQuickPick(['1', '2', '3']);
+      vscode.window.showInformationMessage(
+        `Hello World from local-extension, you picked ${selection}`
+      );
+    })
+  );
+}
+
+module.exports = {
+  activate,
+};
+```
+
+2. Simply place your developed `index.js` into the `.vscode/local-extension` directory.
+   The Local Extension Runner will automatically detect and execute your extension upon starting VSCode.
 
 ## Known Issues
 
