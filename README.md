@@ -46,3 +46,7 @@ As a result, any features that rely on `contributions` within the `package.json`
 ### 0.0.1
 
 Initial release.
+
+### 0.0.2
+
+Pass `vscode` to `activate` function.
