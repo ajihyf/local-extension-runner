@@ -41,8 +41,7 @@ async function activateLocalExtensions(context: vscode.ExtensionContext) {
         const localExtensionUri = vscode.Uri.joinPath(
           folder.uri,
           '.vscode',
-          'local-extension',
-          'extension.js'
+          'local-extension'
         );
         try {
           if (!(await fileExists(localExtensionUri))) {

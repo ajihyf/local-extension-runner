@@ -7,7 +7,7 @@ Therefore, we are hoping to have a local plugin runner that can execute the exte
 
 ## How to Use
 
-Simply place your developed `extension.js` into the `.vscode/local-extension` directory.
+Simply place your developed `index.js` into the `.vscode/local-extension` directory.
 The Local Extension Runner will automatically detect and execute your extension upon starting VSCode.
 
 ## Known Issues
