@@ -98,7 +98,7 @@ async function activateLocalExtensions(context: vscode.ExtensionContext) {
         } catch (err) {
           console.error(`Failed to load local extension ${folder.uri}`, err);
           vscode.window.showErrorMessage(
-            `Failed to load local extension ${folder.uri}`
+            `Failed to load local extension ${folder.uri}, error: ${err}`
           );
         } finally {
           if (requireId && module) {
@@ -109,6 +109,11 @@ async function activateLocalExtensions(context: vscode.ExtensionContext) {
               exports,
               activated,
             });
+          }
+          if (subscriptions.length) {
+            localExtensionDisposables.push(
+              vscode.Disposable.from(...subscriptions)
+            );
           }
         }
       })
