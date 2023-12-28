@@ -3,6 +3,19 @@
   "displayName": "Local Extension Runner",
   "description": "Run any local extension javascript files",
   "version": "0.0.1",
+  "publisher": "ajihyf",
+  "author": {
+    "name": "ajihyf",
+    "email": "ajihyf@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/ajihyf/local-extension-runner/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ajihyf/local-extension-runner"
+  },
+  "license": "MIT",
   "engines": {
     "vscode": "^1.70.0"
   },
