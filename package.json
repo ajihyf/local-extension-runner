@@ -2,7 +2,7 @@
   "name": "local-extension-runner",
   "displayName": "Local Extension Runner",
   "description": "Run any local extension javascript files",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "ajihyf",
   "author": {
     "name": "ajihyf",
@@ -32,7 +32,16 @@
         "command": "local-extension-runner.reload",
         "title": "Local Extension Runner: Reload local extensions"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Local Extension Runner",
+      "properties": {
+        "local-extension-runner.extensions.settings": {
+          "type": "object",
+          "description": "Used by local extensions to store their settings"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "pnpm run compile",
