@@ -54,3 +54,7 @@ Pass `vscode` to `activate` function.
 ### 0.0.3
 
 Fix Disposable leakage, add error details when activating extension error happens.
+
+### 0.0.4
+
+Optimize local extension `ExtensionContext` creation.

@@ -55,42 +55,15 @@ async function activateLocalExtensions(context: vscode.ExtensionContext) {
           // We don't use {...context} because some of the context keys
           // are marked as proposed-api, getting them on non-insider VSCode will
           // results in an error
-          const {
-            workspaceState,
-            globalState,
-            secrets,
-            extensionUri,
-            extensionPath,
-            environmentVariableCollection,
-            asAbsolutePath,
-            storageUri,
-            storagePath,
-            globalStorageUri,
-            globalStoragePath,
-            logUri,
-            logPath,
-            extensionMode,
-            extension,
-          } = context;
+          const newContext: Record<string, unknown> = {};
+          for (const key of Object.keys(context)) {
+            try {
+              newContext[key] = context[key as keyof vscode.ExtensionContext];
+            } catch {}
+          }
+          newContext.subscriptions = subscriptions;
           exports = await module.activate?.(
-            Object.freeze({
-              subscriptions,
-              workspaceState,
-              globalState,
-              secrets,
-              extensionUri,
-              extensionPath,
-              environmentVariableCollection,
-              asAbsolutePath,
-              storageUri,
-              storagePath,
-              globalStorageUri,
-              globalStoragePath,
-              logUri,
-              logPath,
-              extensionMode,
-              extension,
-            }),
+            Object.freeze(newContext as unknown as vscode.ExtensionContext),
             vscode
           );
           activated = true;
