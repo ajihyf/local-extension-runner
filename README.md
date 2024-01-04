@@ -59,6 +59,6 @@ Fix Disposable leakage, add error details when activating extension error happen
 
 Optimize local extension `ExtensionContext` creation.
 
-### 0.0.4
+### 0.0.5
 
 Support local extensions to store their settings in "local-extension-runner.extensions.settings".
